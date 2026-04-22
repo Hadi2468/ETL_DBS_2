@@ -1,0 +1,537 @@
+==================== 2026-04-22T03:42:22.342117Z | 019db348-227a-7ce0-b3a7-361a37d6a982 ====================
+Installing dbt project and profile setup
+03:42:22.418132 [info ]: Info Created .vscode/extensions.json with dbt extension recommendation
+03:42:22.424490 [info ]: Success Project created successfully!
+03:42:22.424728 [info ]: Info Project name: jaffle_shop
+03:42:22.425783 [info ]: Info Project directory: jaffle_shop
+03:42:22.426399 [info ]: Info Setting up your profile...
+03:42:22.455819 [info ]: Info Creating new profile...
+03:42:25.560813 [info ]: No dbt_cloud.yml found - proceeding without cloud pre-population
+03:43:55.121190 [info ]: Success Profile written to C:\Users\drhad\.dbt\profiles.yml
+03:43:55.121720 [info ]: Validating profile inputs, adapters, and connection
+
+dbt-fusion 2.0.0-preview.83
+03:43:55.126524 [info ]: Started loading project
+   Loading ~/.dbt/profiles.yml
+03:43:55.134054 [info ]: Finished loading project [  0.01s]
+03:43:55.134664 [info ]: Started debugging
+03:43:55.134998 [info ]: Debugging profile: dev
+03:43:55.135315 [info ]: Debugging dbt version: 2.0.0-preview.83
+03:43:55.135735 [info ]: Debugging platform: windows x86_64 (windows)
+03:43:55.137263 [info ]: Debugging adapter type: databricks (remote)
+03:43:55.199046 [info ]: Debugging dependencies:
+  git: OK
+03:43:55.200744 [info ]: Debugging connection:
+  "schema": "schema2",
+  "host": "https://adb-7405606890264417.17.azuredatabricks.net",
+  "http_path": "/sql/1.0/warehouses/c7f7e3540872712c"
+03:44:03.683416 [debug]: Query executed on node unknown:
+select 1 as id
+03:44:03.684524 [info ]: Debugging connection test: OK
+03:44:03.686429 [info ]: Debugged All checks passed!
+03:44:03.687353 [info ]: Finished debugging [  8.55s]
+New version available 2.0.0-preview.173 (run `dbt system update`)
+03:44:04.821921 [info ]: 
+==================== Execution Summary =====================
+Finished 'init' successfully for target 'dev' [1m 42s]
+==================== 2026-04-22T03:48:43.883426Z | 019db34d-f4e7-7b40-8c19-489e65a4aa7c ====================
+dbt-fusion 2.0.0-preview.83
+03:48:43.885112 [info ]: Started loading project
+   Loading ~/.dbt/profiles.yml
+  Fetching packages.yml
+Installing packages
+Installing dbt_utils: 1.3.3
+03:48:45.369032 [info ]: Finished loading project [  1.48s]
+03:48:45.373219 [info ]: Started parsing
+03:48:45.763157 [info ]: Finished parsing [  0.39s]
+03:48:45.835715 [info ]: Started scheduling
+03:48:45.846193 [info ]: Finished scheduling [  0.01s]
+03:48:47.850566 [debug]: Query executed on node unknown:
+select current_version().dbr_version as dbr_version
+03:48:48.658125 [debug]: Query executed on node unknown:
+DESCRIBE TABLE EXTENDED `dbs-project2`.`schema2_raw`.`raw_items` AS JSON
+03:48:48.658789 [debug]: Query executed on node unknown:
+DESCRIBE TABLE EXTENDED `dbs-project2`.`schema2_raw`.`raw_customers` AS JSON
+03:48:50.055263 [debug]: Query executed on node unknown:
+DESCRIBE TABLE EXTENDED `dbs-project2`.`schema2_raw`.`raw_products` AS JSON
+03:48:50.101028 [debug]: Query executed on node unknown:
+DESCRIBE TABLE EXTENDED `dbs-project2`.`schema2_raw`.`raw_orders` AS JSON
+03:48:50.147133 [debug]: Query executed on node unknown:
+DESCRIBE TABLE EXTENDED `dbs-project2`.`schema2_raw`.`raw_stores` AS JSON
+03:48:50.150560 [debug]: Query executed on node unknown:
+DESCRIBE TABLE EXTENDED `dbs-project2`.`schema2_raw`.`raw_supplies` AS JSON
+03:48:51.152265 [warn ]: dbt1014: Failed to download seed schema for 'seed.jaffle_shop.raw_customers'. Setting 'static_analysis' to off. Skipping analysis for 'model.jaffle_shop.stg_customers': [Databricks] FAILED: BAD_REQUEST [TABLE_OR_VIEW_NOT_FOUND] The table or view `dbs-project2`.`schema2_raw`.`raw_customers` cannot be found. Verify the spelling and correctness of the schema and catalog.
+If you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.
+To tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 1 pos 24
+03:48:51.152383 [warn ]: dbt1014: Failed to download seed schema for 'seed.jaffle_shop.raw_items'. Setting 'static_analysis' to off. Skipping analysis for 'model.jaffle_shop.stg_order_items': [Databricks] FAILED: BAD_REQUEST [TABLE_OR_VIEW_NOT_FOUND] The table or view `dbs-project2`.`schema2_raw`.`raw_items` cannot be found. Verify the spelling and correctness of the schema and catalog.
+If you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.
+To tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 1 pos 24
+03:48:51.152426 [warn ]: dbt1014: Failed to download seed schema for 'seed.jaffle_shop.raw_orders'. Setting 'static_analysis' to off. Skipping analysis for 'model.jaffle_shop.stg_orders': [Databricks] FAILED: BAD_REQUEST [TABLE_OR_VIEW_NOT_FOUND] The table or view `dbs-project2`.`schema2_raw`.`raw_orders` cannot be found. Verify the spelling and correctness of the schema and catalog.
+If you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.
+To tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 1 pos 24
+03:48:51.152457 [warn ]: dbt1014: Failed to download seed schema for 'seed.jaffle_shop.raw_products'. Setting 'static_analysis' to off. Skipping analysis for 'model.jaffle_shop.stg_products': [Databricks] FAILED: BAD_REQUEST [TABLE_OR_VIEW_NOT_FOUND] The table or view `dbs-project2`.`schema2_raw`.`raw_products` cannot be found. Verify the spelling and correctness of the schema and catalog.
+If you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.
+To tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 1 pos 24
+03:48:51.152501 [warn ]: dbt1014: Failed to download seed schema for 'seed.jaffle_shop.raw_stores'. Setting 'static_analysis' to off. Skipping analysis for 'model.jaffle_shop.stg_locations': [Databricks] FAILED: BAD_REQUEST [TABLE_OR_VIEW_NOT_FOUND] The table or view `dbs-project2`.`schema2_raw`.`raw_stores` cannot be found. Verify the spelling and correctness of the schema and catalog.
+If you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.
+To tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 1 pos 24
+03:48:51.152524 [warn ]: dbt1014: Failed to download seed schema for 'seed.jaffle_shop.raw_supplies'. Setting 'static_analysis' to off. Skipping analysis for 'model.jaffle_shop.stg_supplies': [Databricks] FAILED: BAD_REQUEST [TABLE_OR_VIEW_NOT_FOUND] The table or view `dbs-project2`.`schema2_raw`.`raw_supplies` cannot be found. Verify the spelling and correctness of the schema and catalog.
+If you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.
+To tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 1 pos 24
+03:48:51.335663 [info ]: Started building task graph
+03:48:51.336578 [info ]: Finished building task graph [  0.00s]
+03:48:52.053946 [debug]: Query executed on node unknown:
+/* {"app":"dbt","dbt_version":"2.0.0","profile_name":"jaffle_shop","target_name":"dev","connection_name":""} */
+show databases
+03:48:52.726182 [debug]: Query executed on node unknown:
+/* {"app":"dbt","dbt_version":"2.0.0","profile_name":"jaffle_shop","target_name":"dev","connection_name":""} */
+create schema if not exists `dbs-project2`.`schema2`
+03:48:52.726453 [info ]: Started rendering (12 nodes)
+03:48:52.726705 [info ]: Started model schema2.stg_locations
+03:48:52.726749 [debug]: Started rendering model schema2.stg_locations
+03:48:52.726788 [info ]: Started model schema2.stg_customers
+03:48:52.726799 [debug]: Started rendering model schema2.stg_customers
+03:48:52.726809 [info ]: Started model schema2.stg_supplies
+03:48:52.726814 [debug]: Started rendering model schema2.stg_supplies
+03:48:52.726833 [info ]: Started model schema2.stg_products
+03:48:52.726837 [debug]: Started rendering model schema2.stg_products
+03:48:52.726844 [info ]: Started model schema2.stg_orders
+03:48:52.726849 [debug]: Started rendering model schema2.stg_orders
+03:48:52.726857 [info ]: Started model schema2.stg_order_items
+03:48:52.726861 [debug]: Started rendering model schema2.stg_order_items
+03:48:52.735597 [debug]: Finished rendering [  0.01s] model schema2.stg_orders [success]
+03:48:52.735971 [info ]: Started analyzing (12 nodes)
+03:48:52.736059 [debug]: Started analyzing model schema2.stg_orders
+03:48:52.736092 [debug]: Finished rendering [  0.01s] model schema2.stg_locations [success]
+03:48:52.736281 [debug]: Started analyzing model schema2.stg_locations
+03:48:52.736302 [debug]: Finished rendering [  0.01s] model schema2.stg_supplies [success]
+03:48:52.736517 [debug]: Started analyzing model schema2.stg_supplies
+03:48:52.736642 [debug]: Finished rendering [  0.01s] model schema2.stg_customers [success]
+03:48:52.736850 [debug]: Started analyzing model schema2.stg_customers
+03:48:52.736877 [debug]: Finished rendering [  0.01s] model schema2.stg_products [success]
+03:48:52.737082 [debug]: Started analyzing model schema2.stg_products
+03:48:52.737106 [debug]: Finished rendering [  0.01s] model schema2.stg_order_items [success]
+03:48:52.738652 [debug]: Started analyzing model schema2.stg_order_items
+03:48:53.179916 [debug]: Query executed on node unknown:
+DESCRIBE TABLE EXTENDED `dbs-project2`.schema2_raw.raw_stores AS JSON
+03:48:53.193569 [debug]: Query executed on node unknown:
+DESCRIBE TABLE EXTENDED `dbs-project2`.schema2_raw.raw_orders AS JSON
+03:48:53.212086 [debug]: Query executed on node unknown:
+DESCRIBE TABLE EXTENDED `dbs-project2`.schema2_raw.raw_customers AS JSON
+03:48:53.237277 [debug]: Query executed on node unknown:
+DESCRIBE TABLE EXTENDED `dbs-project2`.schema2_raw.raw_products AS JSON
+03:48:53.276191 [debug]: Query executed on node unknown:
+DESCRIBE TABLE EXTENDED `dbs-project2`.schema2_raw.raw_items AS JSON
+03:48:53.282106 [debug]: Query executed on node unknown:
+DESCRIBE TABLE EXTENDED `dbs-project2`.schema2_raw.raw_supplies AS JSON
+03:48:54.198874 [error]: dbt0214: Table 'dbs-project2.schema2_raw.raw_stores' is missing in remote
+  --> models\staging\stg_locations.sql:6:19 (target\compiled\models\staging\stg_locations.sql:6:19)
+03:48:54.199066 [debug]: Finished analyzing [  1.46s] model schema2.stg_locations [error]
+03:48:54.199595 [info ]: Started running (12 nodes)
+03:48:54.199743 [debug]: Started running model schema2.stg_locations
+03:48:54.199782 [info ]:     Failed [  1.47s] model schema2.stg_locations (view)
+03:48:54.200335 [debug]: Finished running [  0.00s] model schema2.stg_locations [skipped]
+03:48:54.200454 [info ]: Started model schema2.locations
+03:48:54.200471 [debug]: Started rendering model schema2.locations
+03:48:54.200500 [debug]: Finished rendering [  0.00s] model schema2.locations [skipped]
+03:48:54.200608 [debug]: Started analyzing model schema2.locations
+03:48:54.200626 [debug]: Finished analyzing [  0.00s] model schema2.locations [skipped]
+03:48:54.200732 [debug]: Started running model schema2.locations
+03:48:54.200758 [info ]:    Skipped [-------] model schema2.locations (table)
+03:48:54.201379 [debug]: Finished running [  0.00s] model schema2.locations [skipped]
+03:48:54.215059 [error]: dbt0214: Table 'dbs-project2.schema2_raw.raw_customers' is missing in remote
+  --> models\staging\stg_customers.sql:6:19 (target\compiled\models\staging\stg_customers.sql:6:19)
+03:48:54.215202 [debug]: Finished analyzing [  1.48s] model schema2.stg_customers [error]
+03:48:54.215513 [debug]: Started running model schema2.stg_customers
+03:48:54.215555 [info ]:     Failed [  1.49s] model schema2.stg_customers (view)
+03:48:54.216376 [debug]: Finished running [  0.00s] model schema2.stg_customers [skipped]
+03:48:54.240434 [error]: dbt0214: Table 'dbs-project2.schema2_raw.raw_products' is missing in remote
+  --> models\staging\stg_products.sql:6:19 (target\compiled\models\staging\stg_products.sql:6:19)
+03:48:54.240546 [debug]: Finished analyzing [  1.50s] model schema2.stg_products [error]
+03:48:54.241271 [info ]: Started model schema2.products
+03:48:54.241292 [debug]: Started rendering model schema2.products
+03:48:54.241319 [debug]: Finished rendering [  0.00s] model schema2.products [skipped]
+03:48:54.241428 [debug]: Started analyzing model schema2.products
+03:48:54.241449 [debug]: Finished analyzing [  0.00s] model schema2.products [skipped]
+03:48:54.241566 [debug]: Started running model schema2.stg_products
+03:48:54.241604 [info ]:     Failed [  1.51s] model schema2.stg_products (view)
+03:48:54.243607 [debug]: Finished running [  0.00s] model schema2.stg_products [skipped]
+03:48:54.243762 [debug]: Started running model schema2.products
+03:48:54.243799 [info ]:    Skipped [-------] model schema2.products (table)
+03:48:54.244322 [debug]: Finished running [  0.00s] model schema2.products [skipped]
+03:48:54.247330 [error]: dbt0214: Table 'dbs-project2.schema2_raw.raw_orders' is missing in remote
+  --> models\staging\stg_orders.sql:6:19 (target\compiled\models\staging\stg_orders.sql:6:19)
+03:48:54.247461 [debug]: Finished analyzing [  1.51s] model schema2.stg_orders [error]
+03:48:54.247633 [debug]: Started running model schema2.stg_orders
+03:48:54.247666 [info ]:     Failed [  1.52s] model schema2.stg_orders (view)
+03:48:54.248892 [debug]: Finished running [  0.00s] model schema2.stg_orders [skipped]
+03:48:54.279969 [error]: dbt0214: Table 'dbs-project2.schema2_raw.raw_items' is missing in remote
+  --> models\staging\stg_order_items.sql:6:19 (target\compiled\models\staging\stg_order_items.sql:6:19)
+03:48:54.280104 [debug]: Finished analyzing [  1.54s] model schema2.stg_order_items [error]
+03:48:54.280377 [debug]: Started running model schema2.stg_order_items
+03:48:54.280418 [info ]:     Failed [  1.55s] model schema2.stg_order_items (view)
+03:48:54.281388 [debug]: Finished running [  0.00s] model schema2.stg_order_items [skipped]
+03:48:54.337889 [error]: dbt0214: Table 'dbs-project2.schema2_raw.raw_supplies' is missing in remote
+  --> models\staging\stg_supplies.sql:6:19 (target\compiled\models\staging\stg_supplies.sql:6:19)
+03:48:54.338022 [debug]: Finished analyzing [  1.60s] model schema2.stg_supplies [error]
+03:48:54.338503 [info ]: Started model schema2.supplies
+03:48:54.338523 [debug]: Started rendering model schema2.supplies
+03:48:54.338553 [debug]: Finished rendering [  0.00s] model schema2.supplies [skipped]
+03:48:54.338650 [debug]: Started analyzing model schema2.supplies
+03:48:54.338669 [debug]: Finished analyzing [  0.00s] model schema2.supplies [skipped]
+03:48:54.338761 [debug]: Started running model schema2.stg_supplies
+03:48:54.338793 [info ]:     Failed [  1.61s] model schema2.stg_supplies (view)
+03:48:54.339442 [debug]: Finished running [  0.00s] model schema2.stg_supplies [skipped]
+03:48:54.339566 [debug]: Started running model schema2.supplies
+03:48:54.339597 [info ]:    Skipped [-------] model schema2.supplies (table)
+03:48:54.340802 [debug]: Finished running [  0.00s] model schema2.supplies [skipped]
+03:48:54.340921 [info ]: Started model schema2.order_items
+03:48:54.340938 [debug]: Started rendering model schema2.order_items
+03:48:54.340961 [debug]: Finished rendering [  0.00s] model schema2.order_items [skipped]
+03:48:54.341055 [debug]: Started analyzing model schema2.order_items
+03:48:54.341100 [debug]: Finished analyzing [  0.00s] model schema2.order_items [skipped]
+03:48:54.341188 [info ]: Started model schema2.orders
+03:48:54.341201 [debug]: Started rendering model schema2.orders
+03:48:54.341223 [debug]: Finished rendering [  0.00s] model schema2.orders [skipped]
+03:48:54.341304 [debug]: Started analyzing model schema2.orders
+03:48:54.341324 [debug]: Finished analyzing [  0.00s] model schema2.orders [skipped]
+03:48:54.341420 [info ]: Started model schema2.customers
+03:48:54.341433 [debug]: Started rendering model schema2.customers
+03:48:54.341453 [debug]: Finished rendering [  0.00s] model schema2.customers [skipped]
+03:48:54.341536 [info ]: Finished rendering [  1.62s] (12 nodes, 6 skipped, 0 errors)
+03:48:54.342326 [debug]: Started analyzing model schema2.customers
+03:48:54.342363 [debug]: Finished analyzing [  0.00s] model schema2.customers [skipped]
+03:48:54.342464 [info ]: Finished analyzing [  1.61s] (12 nodes, 6 skipped, 6 errors)
+03:48:54.342921 [debug]: Started running model schema2.order_items
+03:48:54.342954 [info ]:    Skipped [-------] model schema2.order_items (table)
+03:48:54.343460 [debug]: Finished running [  0.00s] model schema2.order_items [skipped]
+03:48:54.343625 [debug]: Started running model schema2.orders
+03:48:54.343694 [info ]:    Skipped [-------] model schema2.orders (table)
+03:48:54.344275 [debug]: Finished running [  0.00s] model schema2.orders [skipped]
+03:48:54.345575 [debug]: Started running model schema2.customers
+03:48:54.345683 [info ]:    Skipped [-------] model schema2.customers (table)
+03:48:54.346669 [debug]: Finished running [  0.00s] model schema2.customers [skipped]
+03:48:54.346810 [info ]: Finished running [  0.15s] (12 nodes, 12 skipped, 0 errors)
+New version available 2.0.0-preview.173 (run `dbt system update`)
+03:48:54.510231 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 6 warnings and 6 errors for target 'dev' [10.6s]
+Processed: 12 models
+Summary: 12 total | 6 error | 6 skipped
+[0m21:08:24.082822 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CD8F2671D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CD8F2CB3D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CD8F2C99D0>]}
+
+
+============================== 21:08:24.085737 | 190b5251-2c0f-4595-8fe8-1e4c9e99031e ==============================
+[0m21:08:24.085737 [info ] [MainThread]: Running with dbt=1.11.8
+[0m21:08:24.085737 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\drhad\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'use_colors': 'True', 'invocation_command': 'dbt debug', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m21:08:24.085737 [info ] [MainThread]: dbt version: 1.11.8
+[0m21:08:24.097850 [info ] [MainThread]: python version: 3.11.14
+[0m21:08:24.098860 [info ] [MainThread]: python path: C:\Users\drhad\anaconda3\envs\p311\python.exe
+[0m21:08:24.099620 [info ] [MainThread]: os info: Windows-10-10.0.26200-SP0
+[0m21:08:24.696761 [debug] [MainThread]: Traceback (most recent call last):
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\factory.py", line 68, in load_plugin
+    mod: Any = import_module("." + name, "dbt.adapters")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\databricks\__init__.py", line 4, in <module>
+    from dbt.adapters.databricks.impl import DatabricksAdapter
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\databricks\impl.py", line 23, in <module>
+    from dbt.adapters.spark.impl import (
+ModuleNotFoundError: No module named 'dbt.adapters.spark'
+
+[0m21:08:24.697817 [error] [MainThread]: Encountered an error:
+No module named 'dbt.adapters.spark'
+[0m21:08:24.701749 [error] [MainThread]: Traceback (most recent call last):
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\cli\requires.py", line 182, in wrapper
+    result, success = func(*args, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\cli\requires.py", line 128, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\cli\main.py", line 425, in debug
+    results = task.run()
+              ^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\task\debug.py", line 114, in run
+    load_profile_status: SubtaskStatus = self._load_profile()
+                                         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\task\debug.py", line 205, in _load_profile
+    profile: Profile = Profile.render(
+                       ^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\config\profile.py", line 404, in render
+    return cls.from_raw_profiles(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\config\profile.py", line 370, in from_raw_profiles
+    return cls.from_raw_profile_info(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\config\profile.py", line 326, in from_raw_profile_info
+    credentials: Credentials = cls._credentials_from_profile(
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\config\profile.py", line 150, in _credentials_from_profile
+    cls = load_plugin(typename)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\factory.py", line 239, in load_plugin
+    return FACTORY.load_plugin(name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\factory.py", line 68, in load_plugin
+    mod: Any = import_module("." + name, "dbt.adapters")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\databricks\__init__.py", line 4, in <module>
+    from dbt.adapters.databricks.impl import DatabricksAdapter
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\databricks\impl.py", line 23, in <module>
+    from dbt.adapters.spark.impl import (
+ModuleNotFoundError: No module named 'dbt.adapters.spark'
+
+[0m21:08:24.701749 [debug] [MainThread]: Command `dbt debug` failed at 21:08:24.701749 after 0.70 seconds
+[0m21:08:24.701749 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CD8EFFFE50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CD8EFFFAD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CD885F8A90>]}
+[0m21:08:24.701749 [debug] [MainThread]: Flushing usage events
+[0m21:08:25.742946 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m21:08:43.736558 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DE573EFF50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DE577326D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DE577337D0>]}
+
+
+============================== 21:08:43.736558 | 36334a0b-f28b-4f36-8ce0-300c690032bb ==============================
+[0m21:08:43.736558 [info ] [MainThread]: Running with dbt=1.11.8
+[0m21:08:43.736558 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\drhad\\.dbt', 'invocation_command': 'dbt run', 'use_colors': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m21:08:43.736558 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path D:\DE\Databricks\Projects\GitHub\ETL_DBS_2\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m21:08:43.736558 [debug] [MainThread]: Command `dbt run` failed at 21:08:43.736558 after 0.07 seconds
+[0m21:08:43.736558 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DE508F8A90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DE57665690>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001DE57667F90>]}
+[0m21:08:43.736558 [debug] [MainThread]: Flushing usage events
+[0m21:08:44.444315 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m21:09:34.568842 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002BCB13AFAD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002BCB54D50D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002BCB4C95190>]}
+
+
+============================== 21:09:34.568842 | efe65f4f-6e71-4f4b-a84a-f2c8cf97fed4 ==============================
+[0m21:09:34.568842 [info ] [MainThread]: Running with dbt=1.11.8
+[0m21:09:34.568842 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\drhad\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt init ETL_DBS_2', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m21:09:34.582858 [debug] [MainThread]: Starter project path: C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\include\starter_project
+[0m21:09:34.604920 [info ] [MainThread]: 
+Your new dbt project "ETL_DBS_2" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m21:09:34.605919 [info ] [MainThread]: Setting up your profile.
+[0m21:10:26.816592 [debug] [MainThread]: Traceback (most recent call last):
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\factory.py", line 68, in load_plugin
+    mod: Any = import_module("." + name, "dbt.adapters")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\databricks\__init__.py", line 4, in <module>
+    from dbt.adapters.databricks.impl import DatabricksAdapter
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\databricks\impl.py", line 23, in <module>
+    from dbt.adapters.spark.impl import (
+ModuleNotFoundError: No module named 'dbt.adapters.spark'
+
+[0m21:10:26.817595 [error] [MainThread]: Encountered an error:
+No module named 'dbt.adapters.spark'
+[0m21:10:26.817595 [error] [MainThread]: Traceback (most recent call last):
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\cli\requires.py", line 182, in wrapper
+    result, success = func(*args, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\cli\requires.py", line 128, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\cli\main.py", line 488, in init
+    results = task.run()
+              ^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\task\init.py", line 346, in run
+    self.setup_profile(profile_name)
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\task\init.py", line 262, in setup_profile
+    self.create_profile_from_target(adapter, profile_name=profile_name)
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\task\init.py", line 172, in create_profile_from_target
+    load_plugin(adapter)
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\factory.py", line 239, in load_plugin
+    return FACTORY.load_plugin(name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\factory.py", line 68, in load_plugin
+    mod: Any = import_module("." + name, "dbt.adapters")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\databricks\__init__.py", line 4, in <module>
+    from dbt.adapters.databricks.impl import DatabricksAdapter
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\databricks\impl.py", line 23, in <module>
+    from dbt.adapters.spark.impl import (
+ModuleNotFoundError: No module named 'dbt.adapters.spark'
+
+[0m21:10:26.817595 [debug] [MainThread]: Command `dbt init` failed at 21:10:26.817595 after 52.31 seconds
+[0m21:10:26.822296 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002BCB5495A90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002BCB5233710>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002BCB5233E10>]}
+[0m21:10:26.822296 [debug] [MainThread]: Flushing usage events
+[0m21:10:30.613965 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m21:11:53.800087 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001F1F20370D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001F1F2065BD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001F1F2066290>]}
+
+
+============================== 21:11:53.803094 | 10263567-4b8d-45fb-ac33-34e35b01c812 ==============================
+[0m21:11:53.803094 [info ] [MainThread]: Running with dbt=1.11.8
+[0m21:11:53.803094 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\drhad\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt debug', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'D:\\DE\\Databricks\\Projects\\GitHub\\ETL_DBS_2\\logs'}
+[0m21:11:53.803094 [info ] [MainThread]: dbt version: 1.11.8
+[0m21:11:53.803094 [info ] [MainThread]: python version: 3.11.14
+[0m21:11:53.817857 [info ] [MainThread]: python path: C:\Users\drhad\anaconda3\envs\p311\python.exe
+[0m21:11:53.818871 [info ] [MainThread]: os info: Windows-10-10.0.26200-SP0
+[0m21:11:53.824463 [info ] [MainThread]: Using profiles dir at C:\Users\drhad\.dbt
+[0m21:11:53.825416 [info ] [MainThread]: Using profiles.yml file at C:\Users\drhad\.dbt\profiles.yml
+[0m21:11:53.825416 [info ] [MainThread]: Using dbt_project.yml file at D:\DE\Databricks\Projects\GitHub\ETL_DBS_2\dbt_project.yml
+[0m21:11:53.909503 [info ] [MainThread]: Configuration:
+[0m21:11:53.910450 [info ] [MainThread]:   profiles.yml file [[31mERROR invalid[0m]
+[0m21:11:53.911449 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m21:11:53.911449 [info ] [MainThread]: Required dependencies:
+[0m21:11:53.912521 [debug] [MainThread]: Executing "git --help"
+[0m21:11:53.958848 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Reset current HEAD to the specified state\n   switch     Switch branches\n   tag        Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m21:11:53.958848 [debug] [MainThread]: STDERR: "b''"
+[0m21:11:53.959847 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m21:11:53.959847 [info ] [MainThread]: Connection test skipped since no profile was found
+[0m21:11:53.960848 [info ] [MainThread]: [31m1 check failed:[0m
+[0m21:11:53.960848 [info ] [MainThread]: Profile loading failed for the following reason:
+Runtime Error
+  Could not find profile named 'ETL_DBS_2'
+
+
+[0m21:11:53.961848 [debug] [MainThread]: Command `dbt debug` failed at 21:11:53.961848 after 0.24 seconds
+[0m21:11:53.962864 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001F1EB2C85D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001F1EE7FF290>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001F1F31D3E90>]}
+[0m21:11:53.962864 [debug] [MainThread]: Flushing usage events
+[0m21:11:54.636484 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m21:12:21.223376 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022C0195B2D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022C01939350>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022C01905CD0>]}
+
+
+============================== 21:12:21.223990 | b89e51ea-2831-4d9d-9a44-418a9ff8b1a6 ==============================
+[0m21:12:21.223990 [info ] [MainThread]: Running with dbt=1.11.8
+[0m21:12:21.223990 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\drhad\\.dbt', 'use_colors': 'True', 'invocation_command': 'dbt debug', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m21:12:21.239709 [info ] [MainThread]: dbt version: 1.11.8
+[0m21:12:21.240829 [info ] [MainThread]: python version: 3.11.14
+[0m21:12:21.240829 [info ] [MainThread]: python path: C:\Users\drhad\anaconda3\envs\p311\python.exe
+[0m21:12:21.240829 [info ] [MainThread]: os info: Windows-10-10.0.26200-SP0
+[0m21:12:21.780376 [debug] [MainThread]: Traceback (most recent call last):
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\factory.py", line 68, in load_plugin
+    mod: Any = import_module("." + name, "dbt.adapters")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\databricks\__init__.py", line 4, in <module>
+    from dbt.adapters.databricks.impl import DatabricksAdapter
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\databricks\impl.py", line 23, in <module>
+    from dbt.adapters.spark.impl import (
+ModuleNotFoundError: No module named 'dbt.adapters.spark'
+
+[0m21:12:21.780376 [error] [MainThread]: Encountered an error:
+No module named 'dbt.adapters.spark'
+[0m21:12:21.780376 [error] [MainThread]: Traceback (most recent call last):
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\cli\requires.py", line 182, in wrapper
+    result, success = func(*args, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\cli\requires.py", line 128, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\cli\main.py", line 425, in debug
+    results = task.run()
+              ^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\task\debug.py", line 114, in run
+    load_profile_status: SubtaskStatus = self._load_profile()
+                                         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\task\debug.py", line 205, in _load_profile
+    profile: Profile = Profile.render(
+                       ^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\config\profile.py", line 404, in render
+    return cls.from_raw_profiles(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\config\profile.py", line 370, in from_raw_profiles
+    return cls.from_raw_profile_info(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\config\profile.py", line 326, in from_raw_profile_info
+    credentials: Credentials = cls._credentials_from_profile(
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\config\profile.py", line 150, in _credentials_from_profile
+    cls = load_plugin(typename)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\factory.py", line 239, in load_plugin
+    return FACTORY.load_plugin(name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\factory.py", line 68, in load_plugin
+    mod: Any = import_module("." + name, "dbt.adapters")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\databricks\__init__.py", line 4, in <module>
+    from dbt.adapters.databricks.impl import DatabricksAdapter
+  File "C:\Users\drhad\anaconda3\envs\p311\Lib\site-packages\dbt\adapters\databricks\impl.py", line 23, in <module>
+    from dbt.adapters.spark.impl import (
+ModuleNotFoundError: No module named 'dbt.adapters.spark'
+
+[0m21:12:21.780376 [debug] [MainThread]: Command `dbt debug` failed at 21:12:21.780376 after 0.64 seconds
+[0m21:12:21.780376 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022C018F5E50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022C7AAF8A90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022C01905A10>]}
+[0m21:12:21.780376 [debug] [MainThread]: Flushing usage events
+[0m21:12:22.769732 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m21:12:48.504650 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024DBDF6FF50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024DBDE7E690>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024DBA9AEE10>]}
+
+
+============================== 21:12:48.504650 | 912680be-9084-41ce-b0a6-1279aa51c8da ==============================
+[0m21:12:48.504650 [info ] [MainThread]: Running with dbt=1.11.8
+[0m21:12:48.504650 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\drhad\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'use_colors': 'True', 'invocation_command': 'dbt run', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m21:12:48.504650 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path D:\DE\Databricks\Projects\GitHub\ETL_DBS_2\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m21:12:48.504650 [debug] [MainThread]: Command `dbt run` failed at 21:12:48.504650 after 0.07 seconds
+[0m21:12:48.504650 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024DBF282110>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024DBE280DD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024DB7428850>]}
+[0m21:12:48.504650 [debug] [MainThread]: Flushing usage events
+[0m21:12:49.315981 [debug] [MainThread]: An error was encountered while trying to flush usage events
