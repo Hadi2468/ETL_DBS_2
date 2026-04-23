@@ -1,4 +1,14 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "1"
+# ///
+# MAGIC %md
+# MAGIC # Silver Layer
+
+# COMMAND ----------
+
+# Import libraries
 from pyspark.sql.types import *
 from pyspark.sql import functions as F, Window
 from delta.tables import DeltaTable
@@ -6,70 +16,72 @@ import datetime
 
 # COMMAND ----------
 
-spark.sql("SET spark.sql.adaptive.enabled=true")
+## Enable AQE (Adaptive Query Execution)
+# spark.conf.set("spark.sql.adaptive.enabled", "true")
 
 # COMMAND ----------
 
-# MAGIC %run ./helper_function/helper_functions
+# Creating silver schema
+my_catalog = "dbs-project2"
+bronze_schema = "BRONZE_DB"
+silver_schema = "SILVER_DB"
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{my_catalog}`.`{silver_schema}`")
 
 # COMMAND ----------
 
-# MAGIC %md
-# MAGIC Create silver databse
-# MAGIC
+# Staging raw data as a Dataframe
+df_orders = spark.table(f"`{my_catalog}`.`{bronze_schema}`.orders")
+df_lineitem = spark.table(f"`{my_catalog}`.`{bronze_schema}`.lineitem")
+df_part = spark.table(f"`{my_catalog}`.`{bronze_schema}`.part")
 
 # COMMAND ----------
 
-SRC_DB       = "samples.tpch"        # where original TPC‑H tables live (Delta).tpch.customer
-ANALYTICS_DB = "s3catalog.tpch_star_silver"     # target database for the SCD2 tables
-spark.sql(f"CREATE DATABASE IF NOT EXISTS {ANALYTICS_DB}")
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC STAGING: read source tables
-
-# COMMAND ----------
-
-orders   = spark.table(f"{SRC_DB}.orders")          # ORDERDATE etc.
-lineitem = spark.table(f"{SRC_DB}.lineitem")        # QUANTITY, EXTENDEDPRICE, DISCOUNT
-part     = spark.table(f"{SRC_DB}.part")
+# Table df_orders
+display(df_orders.limit(5))
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC
-# MAGIC ### Demand classification
-# MAGIC https://frepple.com/blog/demand-classification/
+# MAGIC ### Demand Classification
 
 # COMMAND ----------
 
-min_day, max_day = orders.select(F.min("o_orderdate"), F.max("o_orderdate")).first()
-min_day
+# Calculate the calender based on order date
+min_day, max_day = df_orders.select(F.min("o_orderdate"), F.max("o_orderdate")).first()
+display(min_day, max_day)  # datetime.date(1992, 1, 1)    datetime.date(1998, 8, 2)
+max_day = datetime.date(1992, 1, 5)
 
-# COMMAND ----------
+num_days = (max_day - min_day).days
 
-# max_day = datetime.date(1992, 5, 2)
-
-# COMMAND ----------
-
-min_day, max_day = orders.select(F.min("o_orderdate"), F.max("o_orderdate")).first()
-calendar = spark.range(0, (max_day - min_day).days + 1) \
-                .select(F.expr(f"date_add('{min_day}', CAST(id AS INT))").alias("cal_date"))
+calendar = (spark.range(num_days + 1)
+            .withColumn("cal_date", F.date_add(F.lit(min_day), F.col("id").cast('int')))
+            .select("cal_date"))
 calendar.display()
 
 # COMMAND ----------
 
-# MAGIC %md
-# MAGIC PRODUCT METRICS  – ADI + demand class
+# Table df_lineitem
+display(df_lineitem.limit(5))
 
 # COMMAND ----------
 
-daily_part_qty = (lineitem
+# Calculate total quantity shipped for each part
+daily_part_qty = (df_lineitem
                   .groupBy("l_partkey", "l_shipdate")
                   .agg(F.sum("l_quantity").alias("qty")))
+display(daily_part_qty.limit(5))
 
-daily_part_qty.display()
+# COMMAND ----------
+
+
+
+# COMMAND ----------
+
+
+
+# COMMAND ----------
+
+
 
 # COMMAND ----------
 
@@ -158,4 +170,5 @@ else:
 # MAGIC select distinct demand_class from s3catalog.tpch_star_silver.product_demand_scd;
 
 # COMMAND ----------
+
 

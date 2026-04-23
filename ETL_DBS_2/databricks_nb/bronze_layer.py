@@ -5,7 +5,6 @@
 # ///
 # MAGIC %md
 # MAGIC # Bronze Layer
-# MAGIC
 
 # COMMAND ----------
 
@@ -24,9 +23,9 @@ import datetime
 
 # Creating bronze schema
 src_db = "samples.tpch"      # Original source database
-my_catalog = "dbs-project2"  # bronze layer database for raw data ingestion
-my_schema = "BRONZE_DB"
-spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{my_catalog}`.`{my_schema}`")
+bronze_schema = "dbs-project2"  # bronze layer database for raw data ingestion
+bronze_schema = "BRONZE_DB"
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{my_catalog}`.`{bronze_schema}`")
 
 # COMMAND ----------
 
@@ -45,4 +44,4 @@ tables = ["orders", "lineitem", "part"]
 
 for t in tables:
     df = spark.table(f"{src_db}.{t}")
-    df.write.mode("overwrite").saveAsTable(f"`{my_catalog}`.`{my_schema}`.{t}")
+    df.write.mode("overwrite").saveAsTable(f"`{my_catalog}`.`{bronze_schema}`.{t}")
