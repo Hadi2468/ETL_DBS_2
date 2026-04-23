@@ -1,0 +1,48 @@
+# Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "1"
+# ///
+# MAGIC %md
+# MAGIC # Bronze Layer
+# MAGIC
+
+# COMMAND ----------
+
+# Import libraries
+from pyspark.sql.types import *
+from pyspark.sql import functions as F, Window
+from delta.tables import DeltaTable
+import datetime
+
+# COMMAND ----------
+
+## Enable AQE (Adaptive Query Execution)
+# spark.conf.set("spark.sql.adaptive.enabled", "true")
+
+# COMMAND ----------
+
+# Creating bronze schema
+src_db = "samples.tpch"      # Original source database
+my_catalog = "dbs-project2"  # bronze layer database for raw data ingestion
+my_schema = "BRONZE_DB"
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{my_catalog}`.`{my_schema}`")
+
+# COMMAND ----------
+
+# Available catalogs
+spark.sql("SHOW CATALOGS").show()
+
+# COMMAND ----------
+
+# Available schemas in `dbs-project2`
+spark.sql("SHOW SCHEMAS IN `dbs-project2`").show()
+
+# COMMAND ----------
+
+# Landing raw data (3 tables) from source database into Bronze layer
+tables = ["orders", "lineitem", "part"]
+
+for t in tables:
+    df = spark.table(f"{src_db}.{t}")
+    df.write.mode("overwrite").saveAsTable(f"`{my_catalog}`.`{my_schema}`.{t}")
