@@ -1,4 +1,14 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "1"
+# ///
+# MAGIC %md
+# MAGIC # Silver Layer
+
+# COMMAND ----------
+
+# Import libraries
 from pyspark.sql.types import *
 from pyspark.sql import functions as F, Window
 from delta.tables import DeltaTable
@@ -6,41 +16,29 @@ import datetime
 
 # COMMAND ----------
 
-spark.sql("SET spark.sql.adaptive.enabled=true")
+## Enable AQE (Adaptive Query Execution)
+# spark.conf.set("spark.sql.adaptive.enabled", "true")
 
 # COMMAND ----------
 
-# MAGIC %run ./helper_function/helper_functions
+# Creating silver schema
+my_catalog = "dbs-project2"
+bronze_schema = "BRONZE_DB"
+silver_schema = "SILVER_DB"
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{my_catalog}`.`{silver_schema}`")
 
 # COMMAND ----------
 
-# MAGIC %md
-# MAGIC Create silver databse
-# MAGIC
-
-# COMMAND ----------
-
-SRC_DB       = "samples.tpch"        # where original TPC‑H tables live (Delta).tpch.customer
-ANALYTICS_DB = "s3catalog.tpch_star_silver"     # target database for the SCD2 tables
-spark.sql(f"CREATE DATABASE IF NOT EXISTS {ANALYTICS_DB}")
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC STAGING: read source tables
-
-# COMMAND ----------
-
-orders   = spark.table(f"{SRC_DB}.orders")          # ORDERDATE etc.
-lineitem = spark.table(f"{SRC_DB}.lineitem")        # QUANTITY, EXTENDEDPRICE, DISCOUNT
-part     = spark.table(f"{SRC_DB}.part")
+# Staging raw data as a Dataframe
+df_orders = spark.table(f"`{my_catalog}`.`{bronze_schema}`.orders")
+df_lineitem = spark.table(f"`{my_catalog}`.`{bronze_schema}`.lineitem")
+df_part = spark.table(f"`{my_catalog}`.`{bronze_schema}`.part")
+display(df_part.limit(5))
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC
 # MAGIC ### Demand classification
-# MAGIC https://frepple.com/blog/demand-classification/
 
 # COMMAND ----------
 
@@ -158,4 +156,5 @@ else:
 # MAGIC select distinct demand_class from s3catalog.tpch_star_silver.product_demand_scd;
 
 # COMMAND ----------
+
 
