@@ -33,41 +33,55 @@ spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{my_catalog}`.`{silver_schema}`")
 df_orders = spark.table(f"`{my_catalog}`.`{bronze_schema}`.orders")
 df_lineitem = spark.table(f"`{my_catalog}`.`{bronze_schema}`.lineitem")
 df_part = spark.table(f"`{my_catalog}`.`{bronze_schema}`.part")
-display(df_part.limit(5))
+
+# COMMAND ----------
+
+# Table df_orders
+display(df_orders.limit(5))
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ### Demand classification
+# MAGIC ### Demand Classification
 
 # COMMAND ----------
 
-min_day, max_day = orders.select(F.min("o_orderdate"), F.max("o_orderdate")).first()
-min_day
+# Calculate the calender based on order date
+min_day, max_day = df_orders.select(F.min("o_orderdate"), F.max("o_orderdate")).first()
+display(min_day, max_day)  # datetime.date(1992, 1, 1)    datetime.date(1998, 8, 2)
+max_day = datetime.date(1992, 1, 5)
 
-# COMMAND ----------
+num_days = (max_day - min_day).days
 
-# max_day = datetime.date(1992, 5, 2)
-
-# COMMAND ----------
-
-min_day, max_day = orders.select(F.min("o_orderdate"), F.max("o_orderdate")).first()
-calendar = spark.range(0, (max_day - min_day).days + 1) \
-                .select(F.expr(f"date_add('{min_day}', CAST(id AS INT))").alias("cal_date"))
+calendar = (spark.range(num_days + 1)
+            .withColumn("cal_date", F.date_add(F.lit(min_day), F.col("id").cast('int')))
+            .select("cal_date"))
 calendar.display()
 
 # COMMAND ----------
 
-# MAGIC %md
-# MAGIC PRODUCT METRICS  – ADI + demand class
+# Table df_lineitem
+display(df_lineitem.limit(5))
 
 # COMMAND ----------
 
-daily_part_qty = (lineitem
+# Calculate total quantity shipped for each part
+daily_part_qty = (df_lineitem
                   .groupBy("l_partkey", "l_shipdate")
                   .agg(F.sum("l_quantity").alias("qty")))
+display(daily_part_qty.limit(5))
 
-daily_part_qty.display()
+# COMMAND ----------
+
+
+
+# COMMAND ----------
+
+
+
+# COMMAND ----------
+
+
 
 # COMMAND ----------
 
