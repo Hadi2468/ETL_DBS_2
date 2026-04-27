@@ -5,6 +5,16 @@
 # ///
 # MAGIC %md
 # MAGIC # Silver Layer
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .appName("VSCode-Test") \
+    .master("local[*]") \
+    .getOrCreate()
+
+df = spark.range(5)
+df.show()
+
 
 # COMMAND ----------
 
