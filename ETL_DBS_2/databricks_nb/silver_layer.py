@@ -39,7 +39,7 @@ spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{my_catalog}`.`{silver_schema}`")
 
 # COMMAND ----------
 
-# Staging raw data as a Dataframe
+# Staging (reading) raw data as a Dataframe
 df_orders = spark.table(f"`{my_catalog}`.`{bronze_schema}`.orders")
 df_lineitem = spark.table(f"`{my_catalog}`.`{bronze_schema}`.lineitem")
 df_part = spark.table(f"`{my_catalog}`.`{bronze_schema}`.part")
@@ -56,13 +56,26 @@ display(df_orders.limit(5))
 
 # COMMAND ----------
 
-# Calculate the calender based on order date
+# Select the min and max order date and get their type as DataFrame
+type(df_orders.select(F.min("o_orderdate"), F.max("o_orderdate")))
+
+# COMMAND ----------
+
+# Get the first row of min and max order date       min: (1992, 1, 1)    max:(1998, 8, 2)
 min_day, max_day = df_orders.select(F.min("o_orderdate"), F.max("o_orderdate")).first()
-display(min_day, max_day)  # datetime.date(1992, 1, 1)    datetime.date(1998, 8, 2)
+min_day, max_day = df_orders.select(F.min("o_orderdate"), F.max("o_orderdate")).head()
+min_day, max_day = df_orders.select(F.min("o_orderdate"), F.max("o_orderdate")).collect()[0]
+display(min_day, max_day)
+
+# COMMAND ----------
+
+# Set the max date intentionally to be 1992-01-05
 max_day = datetime.date(1992, 1, 5)
 
+# Calculate the number of days between the min and max order date
 num_days = (max_day - min_day).days
 
+# Create a calendar table with the number of days between the min and max order date
 calendar = (spark.range(num_days + 1)
             .withColumn("cal_date", F.date_add(F.lit(min_day), F.col("id").cast('int')))
             .select("cal_date"))
@@ -70,8 +83,8 @@ calendar.display()
 
 # COMMAND ----------
 
-# Table df_lineitem
-display(df_lineitem.limit(5))
+# Table of df_lineitem
+display(df_lineitem.head(5))
 
 # COMMAND ----------
 
@@ -83,33 +96,52 @@ display(daily_part_qty.limit(5))
 
 # COMMAND ----------
 
+# Joining df_part, calendar, and daily_part_qty
+p = df_part.alias("p")
+c = calendar.alias("c")
+d = daily_part_qty.alias("d")
 
-
-# COMMAND ----------
-
-
-
-# COMMAND ----------
-
-
-
-# COMMAND ----------
-
-part.select("p_partkey").crossJoin(calendar)
-
-# COMMAND ----------
-
-part_daily = (part.select("p_partkey")
-                   .crossJoin(calendar)
-                   .join(daily_part_qty,
-                         (daily_part_qty.l_partkey == part.p_partkey) &
-                         (daily_part_qty.l_shipdate == calendar.cal_date),
-                         "left")
-                   .select(part.p_partkey.alias('partkey'),
-                           calendar.cal_date.alias("date"),
-                           F.coalesce("qty", F.lit(0)).alias("qty")))
+part_daily = (
+    p.crossJoin(c)
+     .join(d,
+           (F.col("d.l_partkey") == F.col("p.p_partkey")) & (F.col("d.l_shipdate") == F.col("c.cal_date")),
+           "left")
+     .select(df_part.p_partkey.alias("partkey"),
+             calendar.cal_date.alias("date"),
+             F.coalesce(F.col("d.qty"), F.lit(0)).alias("qty")))
 
 part_daily.display()
+
+# COMMAND ----------
+
+# Joining df_part, calendar, and daily_part_qty
+part_daily = (df_part.select("p_partkey")
+              .crossJoin(calendar)
+              .join(daily_part_qty,
+                    (daily_part_qty.l_partkey == df_part.p_partkey) & (daily_part_qty.l_shipdate == calendar.cal_date),
+                    "left")
+              .select(df_part.p_partkey.alias("partkey"),
+                      calendar.cal_date.alias("date"),
+                      F.coalesce("qty", F.lit(0)).alias("qty")))
+
+part_daily.display()
+
+# COMMAND ----------
+
+# Size of resulted table
+(part_daily.count(), len(part_daily.columns))
+
+# COMMAND ----------
+
+
+
+# COMMAND ----------
+
+
+
+# COMMAND ----------
+
+
 
 # COMMAND ----------
 

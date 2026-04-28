@@ -35,6 +35,7 @@ spark.sql("SHOW CATALOGS").show()
 # COMMAND ----------
 
 # Available schemas in `dbs-project2`
+# spark.sql(f"SHOW SCHEMAS IN `{my_catalog}`").show()
 spark.sql("SHOW SCHEMAS IN `dbs-project2`").show()
 
 # COMMAND ----------
